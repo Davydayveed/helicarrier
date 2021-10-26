@@ -7,14 +7,16 @@ use num::Zero;
 // The Euclidean Algorithm is a set of instructions for finding the greatest common divisor
 // of any two positive integers.
 
-// Computes the modular inverse of n modulo p.
-// Creates and initializes a BigInt.
 // Modular multiplicative inverse function for big (negative) numbers
+
+/// This function is an implementation of the [extended Euclidean
+/// algorithm](https://en.wikipedia.org/wiki/Extended_Euclidean_algorithm).
+
+// Creates and initializes a BigInt.
 fn modinv(n: &BigInt, p: &BigInt) -> BigInt {
     if p.is_one() {
         return BigInt::one();
     }
-
     let (mut a, mut m, mut x, mut inv) = (n.clone(), p.clone(), BigInt::zero(), BigInt::one());
 
     while a < BigInt::zero() {
@@ -36,6 +38,8 @@ fn modinv(n: &BigInt, p: &BigInt) -> BigInt {
 }
 
 fn main() {
+    //  A BigInt value, also sometimes just called a BigInt, is a bigint primitive,
+    // created by appending n to the end of an integer literal.
     let n = BigInt::parse_bytes(
         b"-243772585612020160733370897338805215918303827399330592839196552441720391139",
         10,
@@ -47,5 +51,5 @@ fn main() {
     )
     .unwrap();
 
-    println!("modinv({0}, {1}) = {2}", n, p, modinv(&n, &p));
+    println!("modinv({0}, {1}) = {2}", n, p, modinv(&n, &p)); // Print Modular multiplicative inverse
 }
